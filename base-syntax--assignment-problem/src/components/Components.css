@@ -1,0 +1,10 @@
+.UserInput {
+    margin: auto;
+    text-align: center;
+}
+
+.UserOutput {
+    margin: 10px auto;
+    text-align: center;
+    border: 1px solid #ccc;
+}
