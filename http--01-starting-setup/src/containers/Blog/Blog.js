@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import Posts from './Posts/Posts';
-import NewPost from './NewPost/NewPost';
+import asyncComponent from '../../hoc/asyncComponent';
+// import NewPost from './NewPost/NewPost';
 import './Blog.css';
-import FullPost from '../../containers/Blog/FullPost/FullPost';
+
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+});
 
 class Blog extends Component {
+    state = {
+        auth: true
+    }
     render () {
         return (
             <div className="Blog">
@@ -15,13 +22,13 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><NavLink 
-                                to="/" 
+                                to="/posts/" 
                                 exact
                                 activeClassName="my-active"
                                 activeStyle={{
                                     color: '#fa923f',
                                     textDecoration: 'underline'
-                                }}>Home</NavLink></li>
+                                }}>Posts</NavLink></li>
                             <li><NavLink to={{
                                 // pathname: this.props.match.url + '/new-post',
                                 pathname: '/new-post',
@@ -31,9 +38,12 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                <Route path="/" exact component={Posts} />
-                <Route path="/new-post" component={NewPost} />
-                <Route path="/:id" exact component={FullPost} />
+                <Switch>
+                    {this.state.auth ? <Route path="/new-post" component={AsyncNewPost} /> : null}
+                    <Route path="/posts/" component={Posts} />
+                    <Route render={() => <h1>Not found</h1>} />
+                    {/* <Redirect from="/" to="/posts" /> */}
+                </Switch>
             </div>
         );
     }
