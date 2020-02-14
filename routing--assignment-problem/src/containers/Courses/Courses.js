@@ -28,7 +28,7 @@ class Courses extends Component {
                         } )
                     }
                 </section>
-                
+                <Route path="/courses/:id/:title" exact component={Course} />
             </div>
         );
     }
