@@ -1,0 +1,2 @@
+export const ADD_NGREDIENT = 'ADD_NGREDIENT';
+export const REMOVE_NGREDIENT = 'REMOVE_NGREDIENT';
