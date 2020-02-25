@@ -5,11 +5,6 @@ import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
     // This could be a functional component
-    componentWillUpdate() {
-        console.log('[OrderSummary] - update');
-        
-    }
-    
     render() {
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map(igKey => {
@@ -33,7 +28,6 @@ class OrderSummary extends Component {
             </Aux>
         );
     }
-    
 }
 
 export default OrderSummary;
